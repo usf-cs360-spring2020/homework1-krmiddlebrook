@@ -1,4 +1,5 @@
 // location of data file
+// TODO: change the path to csv
 let csv = '/data/yearly_volume_of_passengers_by_price_category.csv';
 let parseDate = d3.timeParse('%Y');
 
@@ -77,7 +78,7 @@ function drawAreaChart(data) {
 
     let xAxis = g => g
         .attr("transform", `translate(0,${config.plot.height})`)
-        .call(d3.axisBottom(x).ticks(15).tickSizeOuter(1))
+        .call(d3.axisBottom(x).ticks(15).tickSizeOuter(0))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
             .attr("x", 3)
@@ -101,8 +102,8 @@ function drawAreaChart(data) {
         .join('path')
             .attr('fill', ({key}) => color(key))
             .attr('d', area)
-            .attr('stroke', 'rgb(125,,133,144)')
-            .attr('stroke-width', 1.5)
+            .style('stroke', 'rgb(125,133,144)')
+            .style('stroke-width', 1.5)
             .attr('id', "work_please")
         .append("title")
             .text(({key}) => key);

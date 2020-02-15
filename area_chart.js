@@ -1,5 +1,4 @@
 // location of data file
-// TODO: change the path to csv
 let csv = 'data/yearly_volume_of_passengers_by_price_category.csv';
 let parseDate = d3.timeParse('%Y');
 

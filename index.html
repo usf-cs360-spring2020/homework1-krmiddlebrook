@@ -15,6 +15,13 @@
 
     <!-- Load Font Awesome 5 (free) icons -->
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <!-- include d3.js v5 -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/d3-array.v2.min.js"></script>
+
+    
+
   </head>
 
   <body>
@@ -171,7 +178,7 @@
         <!-- Page Prototypes/Visualizations -->
         <h2 id="visualizations">Prototypes</h2>
 
-        <p>I protyped three visualization and used two different perspectives to interpert the data. All visualizations were protyped in Tableau. In addition, one visualization was implemented in D3 (<a href="#stackedArea">stacked area chart</a>).</p>
+        <p>I protyped three visualization and used two different perspectives to interpert the data. All visualizations were protyped in Tableau. In addition, two visualization were implemented in D3 (<a href="#stackedArea">stacked area chart</a>, <a href="#bar">bar chart</a>).</p>
 
         <p class="buttons">
           <a class="button is-large is-success" href="#stackedArea">
@@ -196,9 +203,7 @@
           </a>
         </p>
 
-        <!-- include d3.js v5 -->
-        <script src="https://d3js.org/d3.v5.min.js"></script>
-        <script src="https://d3js.org/d3-array.v2.min.js"></script>
+        
 
         <!-- Begin Stacked Area Chart -->
         <h3 id='stackedArea'>Stacked Area Chart</h3>
@@ -214,7 +219,6 @@
           <br>
           <h4>D3</h4>
           <div id="stacked_area"></div>
-          <script src="area_chart.js"></script>
         </div>
         <!-- End Stacked Area Chart -->
         <br>
@@ -232,16 +236,19 @@
         <!-- End Stacked Bar Chart 1 -->
         <br>
         <!-- Begin Bar Chart -->
-        <h3>Horizontal Bar Chart</h3>
+        <h3 id='bar'>Horizontal Bar Chart</h3>
         <p>This horizontal bar chart displays the total average volume of passengers by boarding group. The total average passenger count from the entire dataset is grouped by boarding group, so longer bars represent boarding groups with higher average passenger count.
-          Boarding groups are displayed in ascending order by average passenger count. The data was wrangled in Tableau as described in the <a href="#wrangling">wrangling</a> section. This wrangled data is available here: <a href="">Average Volume of Passengers By Boarding Group</a>>
+          Boarding groups are displayed in ascending order by average passenger count. The data was wrangled in Tableau as described in the <a href="#wrangling">wrangling</a> section. This wrangled data is available here: <a href="https://github.com/usf-cs360-spring2020/homework1-krmiddlebrook/blob/gh-pages/data/volume_of_passangers_by_boarding_area.csv">Average Volume of Passengers By Boarding Group</a>>
           The chart suggests that average volume across boarding groups can be clustered into pairs of two. For example, we can see that pairs F and D, B and C, and A and G each respectively share similar average passenger volume. We also see that boarding groups F and D have mucher 
           a much higher average passenger volume than all other groups. 
         </p>
-        <div class="container" id='bar'>
+        <div class="container">
           <div class="chart-image-container">
             <img class="chart" src="assets/Volume of Passengers By Boarding Area.png">
           </div>
+          <br>
+          <h4>D3</h4>
+          <div id="bar_chart"></div>
         </div>
         <!-- End Bar Chart -->
         
@@ -257,7 +264,6 @@
         <!-- Begin Grade Section -->
         <h2 id="grade">Grade</h2>
 
-        <!-- TODO: Remove custom style if no longer needed -->
         <style>
           table.grades tbody tr td:nth-child(1),
           table.grades tbody tr td:nth-child(2) {
@@ -265,7 +271,6 @@
           }
         </style>
 
-        <!-- TODO: Change or remove table -->
         <!-- https://bulma.io/documentation/elements/table/ -->
         <table class="table is-hoverable is-bordered grades">
           <thead>
@@ -293,8 +298,8 @@
 
             <tr>
               <td>A</td>
-              <td><i class="has-text-danger fas fa-times-circle"></i></td>
-              <td>Discussion of how this grade level was not satisfied.</td>
+              <td><i class="has-text-success fas fa-check-circle"></i></td>
+              <td>Added a second d3 visualization</td>
             </tr>
           </tbody>
 
@@ -395,6 +400,11 @@
   });
   </script>
   <!-- End mobile menu responsiveness -->
+
+  <!-- custom charting scripts -->
+  <script src="area_chart.js"></script>
+  <script src="bar_chart.js"></script>
+
   </body>
 
 </html>

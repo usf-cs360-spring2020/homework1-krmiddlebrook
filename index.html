@@ -111,14 +111,16 @@
           dataset from <a href="https://datasf.org/opendata/">DataSF</a>
         </p>
 
-        <p>This would be an excellent place to describe what this page is for, what to find in different sections, describe any motivation or theme behind your visualizations, and so on.</p>
-
-        <p>You should not use this template unless you intend to customize it. Make it your own. Keep in mind this simple template is over 300 lines! You can see other examples of websites using Bulma at their showcase: <a href="https://bulma.io/expo/">bulma.io/expo/</a>.</p>
+        <p> The goal of this assignment was to familiarize myself with basic visualization techniques using two different tools <a href="https://www.tableau.com/">Tableau</a> and <a href="https://d3js.org/">D3</a>.
+          There are three important sections on this page. These sections describe the <a href="#data">data</a>, how the data was <a href="#wrangling">wrangled</a>, and the <a href="#visualizations">visualizations</a>.
+        </p>
 
         <h2 id="data">Data</h2>
 
-        <p>Include some detailed information about the dataset here. You should <a href="#">add a link</a> to the original dataset. You might also want to quote the license:</p>
-
+        <p>I used the <a href="https://data.sfgov.org/Transportation/Air-Traffic-Passenger-Statistics/rkru-6vcg">Air Traffic Passenger Statistics</a> dataset from <a href="https://datasf.org/opendata/">DataSF</a> to practice visualization techniques in Tableau and D3.
+          The dataset contains information about Monthly Passenger Traffic Statistics by Airline at the San Francisco International Airport (SFO). The dataset includes 12 colums, which mostly contain categorical data. There are two numerical columns, activity period which
+          which can be reencoded as a date and passenger count. As of January 2020, the dataset included approximately 21.1k rows.
+        </p>
         <blockquote>
           <p>
             "This data is made available under the Public Domain Dedication and License v1.0 whose full text can be found at: <a href="http://www.opendatacommons.org/licenses/pddl/1.0/">www.opendatacommons.org/licenses/pddl/1.0/</a>"
@@ -126,41 +128,50 @@
           <cite>Put a citation here, possibly link to the dataset license information directly.</cite>
         </blockquote>
 
-        <p>In addition to including a link to the source and license, you should describe the data. You might want a list of some sort to enumerate the different types of columns:</p>
+        <p>The Air Traffic Passenger Statistics dataset contains the following columns:</p>
 
         <ol>
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
+          <li><strong>Activity Period (numeric):</strong> The year and month at which passenger activity took place. The Activity Period is encoded as a number, but can be reencoded to a date type</li>
 
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
+          <li><strong>Operating Airline (text):</strong> Airline name for the operator of aircraft with passenger activity.</li>
 
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
+          <li><strong>Operating Airline IATA Code (text):</strong> The International Air Transport Association (IATA) two-letter designation for the Operating Airline.</li>
 
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
+          <li><strong>Publisher Airline (text):</strong> Airline name that issues the ticket and books revenue for passenger activity.</li>
+          
+          <li><strong>Publisher Airline IATA Code (text):</strong> The International Air Transport Association (IATA) two-letter designation for the Published Airline.</li>
+
+          <li><strong>GEO Summary (text):</strong> Designates whether the passenger activity in relation to SFO arrived from or departed to a location within the United States (“domestic”), or outside the United States (“international”) without stops. Possible values include: Domestic, International.</li>
+
+          <li><strong>GEO Region (text):</strong> Provides a more detailed breakdown of the GEO Summary field to designate the region in the world where activity in relation to SFO arrived from or departed to without stops. Possible values include: US, Africa, Asia, Australia/Oceania, Canada, Caribbean, Central America, Europe, Mexico, Middle East, South America</li>
+
+          <li><strong>Activity Type Code (text):</strong> A description of the physical action a passenger took in relation to a flight, which includes boarding a flight (“enplanements”), getting off a flight (“deplanements”) and transiting to another location (“in- transit”). Possible values include: Enplaned, Deplaned, Thru/Transit.</li>
+
+          <li><strong>Price Category Code (text):</strong> A categorization of whether a Published Airline is a low-cost carrier or not a low-cost carrier. Possible values include: Low Fare, Other.</li>
+          
+          <li><strong>Terminal (text):</strong> The airport terminal designations at SFO where passenger activity took place. Possible values include: Terminal 1, Terminal 2, Terminal 3, International Terminal.</li>
+
+          <li><strong>Boarding Area (text):</strong> The airport boarding area designations at SFO where passenger activity took place. Possible values include: A, B, C, D, E, F, G.</li>
+
+          <li><strong>Passenger Count (numeric):</strong> The number of monthly passengers associated with the above attribute fields.</li>
         </ol>
+        <p>You can access more information about these columns here: <a href="https://data.sfgov.org/api/views/rkru-6vcg/files/30489964-1207-4ee7-802c-e9069504b8eb?download=true&filename=DataSF%20Data%20Dictionary%20for%20Air%20Traffic%20Passenger%20Statistics.pdf">DataSF Data Dictionary for Air Traffic Passenger Statistics</a>.</p>
 
-        <p>This will of course differ depending on the assignment and data.</p>
         <!-- Page Data Wrangling -->
         <h3 id="wrangling">Wrangling</h3>
 
-        <p>Perhaps you had to do some data wrangling to the original dataset to prepare it for visualization. This would be a great place to discuss some of that wrangling.
-
+        <p>Data was wrangled in Tableau and exported to csv format. Each visualization grouped the data differently. In the <a href="#stackedArea">stacked area plot</a> passenger count was grouped by year and price category code (low fare, other).
+          In the first <a href="#stackedBar1">stacked bar plot</a> passenger count was grouped by quarter and terminal (terminal 1-3, international terminal). In the second <a href="#stackedBar2">stacked bar plot</a> passenger count was grouped by
+          month and GEO summary and filtered to only include data from 2019. All visualizations encoded activity period as a date. The function I used in Tableau to convert Activity Period from a numeric type to a date type can be found below.
+        </p>
         <pre>
-          You can even put code into these pre blocks.
-           It will preserve whitespace.
-            That is helpful for formatted code.
+          DATEPARSE("YYYYMM", STR([Activity Period]))
         </pre>
 
-        <p>You can alternatively embed a Gist if you want. There is an "embed" button on 
-          <!-- <a href="https://gist.github.com/octocat/6cad326836d38bd3a7ae">the Gist page</a>  -->
-          and results in something like this:</p>
+        <!-- Page Prototypes/Visualizations -->
+        <h2 id="visualizations">Prototypes</h2>
 
-        <!-- <script src="https://gist.github.com/octocat/6cad326836d38bd3a7ae.js"></script> -->
-
-        <h2 id="visualizations">Visualizations</h2>
-
-        <p>Ideally not everything would be on a single page like this example. Instead, you might want to put each section in its own webpage. You would need to carefully replicate the page template (with the header, navbar, and footer) and make the necessary updates. For example, you want the "About" navbar item to be considered active on an "About" web page.</p>
-
-        <p>For now this is just a demo. The buttons below do not go anywhere, but can be easily changed to link to different visualization pages.</p>
+        <p>I protyped three visualization and used two different perspectives to interpert the data. All visualizations were protyped in Tableau. In addition, one visualization was implemented in D3 (<a href="#stackedArea">stacked area chart</a>).</p>
 
         <p class="buttons">
           <a class="button is-large is-success" href="#stackedArea">
@@ -185,39 +196,49 @@
           </a>
         </p>
 
-        <!-- https://github.com/vega/vega-embed#basic-example -->
-        <!-- <p>It is possible to embed some visualizations directly here too. Here is <a href="https://github.com/vega/vega-embed#basic-example">an example</a> using Vega-Lite:</p>
-
-        <script src="https://cdn.jsdelivr.net/npm/vega@5.9.0"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.2"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.2.1"></script>
-        
-        <div id="vis"></div>
-        <script type="text/javascript">
-          var spec = "https://raw.githubusercontent.com/vega/vega/master/docs/examples/bar-chart.vg.json";
-          vegaEmbed('#vis', spec).then(function(result) {
-            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-          }).catch(console.error);
-        </script> -->
-
         <!-- include d3.js v5 -->
         <script src="https://d3js.org/d3.v5.min.js"></script>
         <script src="https://d3js.org/d3-array.v2.min.js"></script>
 
         <!-- Begin Stacked Area Chart -->
-        <div class="container" id='stackedArea'>
+        <h3 id='stackedArea'>Stacked Area Chart</h3>
+        <div class="container">
+          <p>This stacked area chart displayes the yearly volume of passengers by price category. Passenger count is grouped by year so taller lines represnt higher passenger count. Price category code was encoded using color and applied to the passenger count, so larger area represents the
+            percentage proportion of yearly passengers in a price category code. The data was wrangled in Tableau as described in the <a href="#wrangling">wrangling</a> section. This wrangled data is available here: <a href="https://github.com/usf-cs360-spring2020/homework1-krmiddlebrook/blob/gh-pages/data/yearly_volume_of_passengers_by_price_category.csv">Yearly Volume of Passengers</a>
+            The chart suggests SFO is not a major airport for low fare airlines. However, the proportion of yearly passengers who traveled with a low fare airline apprears to increase between 2009 and 2017. 
+          </p>
+          <h4>Tableau</h4>
           <div class="chart-image-container">
             <img class="chart" src="assets/Yearly Volume of Passenger By Price Category.png">
           </div>
-        
-          <!-- D3 Stacked Area Chart -->
+          <br>
+          <h4>D3</h4>
           <div id="stacked_area"></div>
           <script src="area_chart.js"></script>
         </div>
-      <!-- End Stacked Area Chart -->
-
-        <!-- D3 Stacked Bar Chart -->
-        
+        <!-- End Stacked Area Chart -->
+        <br>
+        <!-- Begin Stacked Bar Chart 1 -->
+        <h3>Stacked Bar Chart 1</h3>
+        <p>HELLLOOOO</p>
+        <div class="container" id='stackedBar1'>
+          <!-- Tableau Stacked Area Chart -->
+          <div class="chart-image-container">
+            <img class="chart" src="assets/Quarterly Volume of Passengers By Terminal.png">
+          </div>
+        </div>
+        <!-- End Stacked Bar Chart 1 -->
+        <br>
+        <!-- Begin Stacked Bar Chart 2 -->
+        <h3>Stacked Bar Chart 2</h3>
+        <p>This stakced area chart </p>
+        <div class="container" id='stackBar2'>
+          <!-- Tableau Stacked Area Chart -->
+          <div class="chart-image-container">
+            <img class="chart" src="assets/Monthly Volume of Passengers by Region in 2019.png">
+          </div>
+        </div>
+        <!-- End Stacked Bar Chart 2 -->
         
 
         <h4>Instructions</h4>
